@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body,
+    html {
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    canvas {
+        display: block;
+    }
+    
+    .content {
+        width: 80vmin;
+        height: 80vmin;
+        position: relative;
+        animation: spin 5s linear 0s infinite;
+    }
+    
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .content>div {
+        --line: #47c;
+        position: absolute;
+        width: 70%;
+        height: 70%;
+        border-radius: 100%;
+        box-sizing: border-box;
+        box-shadow: -3vmin 3vmin 3vmin 0 #161616 inset, 1vmin -1vmin 0.125vmin -1.25vmin var(--line);
+        background: radial-gradient(circle at 36% 64%, #fff0 0 calc(53.5% - 1px), var(--line) 53.5% 54%, #fff0 calc(54% + 1px) 100%), radial-gradient(circle at 38% 62%, #fff0 0 calc(54.5% - 1px), var(--line) 54.5% 55%, #fff0 calc(55% + 1px) 100%), radial-gradient(circle at 42% 58%, #fff0 0 calc(57.75% - 1px), var(--line) 57.75% 58%, #fff0 calc(58% + 1px) 100%), radial-gradient(circle at 40% 60%, #fff0 0 calc(56.75% - 1px), var(--line) 56.75% 57%, #fff0 calc(57% + 1px) 100%), radial-gradient(circle at 45% 55%, #fff0 0 calc(61.75% - 1px), var(--line) 61.75% 62%, #fff0 calc(62% + 1px) 100%), radial-gradient(circle at 43.5% 56.5%, #fff0 0 calc(59.75% - 1px), var(--line) 59.75% 60%, #fff0 calc(60% + 1px) 100%), radial-gradient(circle at 45% 55%, #fff0 0 calc(64.5% - 1px), var(--line) 64.5% 64.75%, #fff0 calc(64.75% + 1px) 100%), radial-gradient(circle at 46.5% 53.5%, #fff0 0 calc(65.5% - 1px), var(--line) 65.5% 65.75%, #fff0 calc(65.75% + 1px) 100%), radial-gradient(circle at 48.5% 51.5%, #fff0 0 calc(67.75% - 1px), var(--line) 67.75% 68.25%, #fff0 calc(68.25% + 1px) 100%), radial-gradient(circle at 49% 51%, #fff0 0 calc(69.5% - 1px), var(--line) 69.5% 70%, #fff0 calc(70% + 1px) 100%);
+    }
+    
+    .top-left {
+        left: 11vmin;
+        top: 2vmin;
+    }
+    
+    .left-bot {
+        bottom: 11vmin;
+        left: 2vmin;
+        transform: rotate(-90deg);
+    }
+    
+    .bot-right {
+        right: 11vmin;
+        bottom: 2vmin;
+        transform: rotate(-180deg);
+    }
+    
+    .right-top {
+        right: 2vmin;
+        top: 11vmin;
+        transform: rotate(-270deg);
+    }
+</style>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+
+    <div class="content">
+        <div class="top-left"></div>
+        <div class="left-bot"></div>
+        <div class="bot-right"></div>
+        <div class="right-top"></div>
+    </div>
+
+    <script>
+        let canvas;
+        let ctx;
+        let w, h;
+
+        function setup() {
+            canvas = document.querySelector("#canvas");
+            ctx = canvas.getContext("2d");
+            resize();
+            window.addEventListener("resize", () => {
+                resize();
+            });
+        }
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+
+        function draw(now) {
+            requestAnimationFrame(draw);
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, w, h);
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+
+            const nrOfCircles = 64;
+            let R1 = Math.min(w, h) * 0.15;
+            let R2 = Math.min(w, h) * 0.22;
+            let R3 = Math.min(w, h) * 0.3;
+            let R4 = Math.min(w, h) * 0.4;
+            for (let i = 0; i < nrOfCircles; i++) {
+                let angle = now / 500 + i / nrOfCircles * Math.PI * 2;
+                let r = (Math.sin(angle) * 0.5 + 0.5) * R4 * 0.15 + 5;
+                let angleOffset = Math.sin(angle) * Math.PI / 8;
+                let a = i / nrOfCircles * Math.PI * 2 + angleOffset;
+                circle(a, r * 0.4, R1);
+                circle(a + Math.PI, r * 0.6, R2);
+                circle(a, r * 0.8, R3);
+                circle(a + Math.PI, r, R4);
+            }
+        }
+
+        function circle(a, r, R) {
+            let x = Math.cos(a) * R + w / 2;
+            let y = Math.sin(a) * R + h / 2;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        setup();
+        draw(performance.now());
+    </script>
+</body>
+
+</html>
