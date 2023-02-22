@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html {
+        font-size: 62.5%;
+    }
+    
+    body {
+        font-family: montserrat;
+        background-color: #0a9396;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        align-items: center;
+    }
+    
+    .main__title {
+        font-size: 4rem
+    }
+    
+    .main__paragraph {
+        font-size: 1.8rem
+    }
+    
+    .modal__img {
+        max-width: 60%;
+        height: auto;
+        display: block;
+        align-items: left;
+    }
+    
+    .modal {
+        max-width: 900px;
+        width: 100%;
+        position: fixed;
+        top: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        background: #ffffff;
+        display: none;
+    }
+    
+    .modal.show {
+        display: block
+    }
+    
+    #close {
+        cursor: pointer;
+        color: white;
+        position: absolute;
+        top: 0;
+        font-size: 25px;
+        right: 0;
+        padding: 1rem;
+        margin-right: 10px;
+    }
+    
+    .modal__title {
+        font-size: 2.5rem;
+    }
+    
+    .modal__title span {
+        display: block;
+        font-weight: 400;
+    }
+    
+    .modal__paragraph {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    .modal__button {
+        background-color: #0a9396;
+        border: none;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+        transition: 0.3s background-color ease-in-out;
+    }
+    
+    .modal__button:hover {
+        background-color: #0a9372;
+    }
+    
+    main {
+        text-align: center;
+    }
+    
+    .modal__container {
+        padding: 1rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
+        position: relative;
+    }
+    
+    @media only screen and (min-width: 768px) {
+        .modal__container {
+            flex-direction: row;
+            padding: 2rem;
+            text-align: right;
+        }
+        .modal__img {
+            max-width: 50%
+        }
+    }
+    
+    @media only screen and (max-width: 500px) {
+        .modal__title {
+            font-size: 2rem;
+        }
+        .modal__img {
+            max-width: 80%
+        }
+    }
+</style>
+
+<body>
+    <main>
+        <div class="modal" id="modal">
+            <div class='modal__container'>
+                <img class="modal__img" src="./raja.gif">
+                <div class="modal__content">
+                    <h1 class="modal__title">ଅନେକ ଶୁଭେଚ୍ଛା ଓ ଶୁଭ କାମନା <span> ରଜ ସଂକ୍ରାନ୍ତି ଉପଲକ୍ଷେ  </span>
+                        <h1>
+                            <p class="modal__paragraph">ବନସ୍ତେ ଡାକିଲା ଗଜ,ବରଷକେ ଥରେ ଆସିଛି ରଜ,ଆସିଛି ରଜ ଲୋଘେନି ନୂଆ ସଜବାଜ..</p>
+                            <button class="modal__button">ରଜ ର ଶୁଭେଚ୍ଛା ଓ ଅଭିନନ୍ଦନ....   ନମସ୍କାର  </button>
+                </div>
+                <i id="close" class="fas fa-times"></i>
+            </div>
+        </div>
+        <h1 class="main__title">Happy ରଜ ସଂକ୍ରାନ୍ତି</h1>
+        <p class="main__paragraph">ଆସ ରଜ ପାନ ଖାଇବା ଆସ ପୋଡ଼ ପିଠା ଖାଇବା ଆସ କବାଡି ଖେଳିବା ରଜ ପର୍ବ କୁ ଖୁସି ରେ ପାଳନ କରିବା ....ରଜ ର ଶୁଭେଚ୍ଛା ଓ ଅଭିନନ୍ଦନ..</p>
+    </main>
+
+    <script>
+        const closeBtn = document.getElementById('close');
+        const modalMenu = document.getElementById('modal');
+        const modalBtn = document.querySelector('.modal__button');
+
+        setTimeout(() => {
+            modalMenu.classList.add('show');
+        }, 30);
+
+        closeBtn.addEventListener('click', () => {
+            modalMenu.classList.remove('show')
+        });
+        modalBtn.addEventListener('click', () => {
+            modalMenu.classList.remove('show')
+        });
+    </script>
+</body>
+
+
+</html>
